@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:00 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/17 11:52:33 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:32:27 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ class	BitcoinExchange
 
 		BitcoinExchange	&operator=(BitcoinExchange const &inst);
 
-	private:
-		bool	_init_database(void);
+		void			proceed_calc(std::string inf_name);
 
+	private:
 		std::map<std::string, float>	_database;
+
+		bool	_init_database(void);
+		void	_print_value(std::string inf_date, float inf_value);
 };
 
 #endif
