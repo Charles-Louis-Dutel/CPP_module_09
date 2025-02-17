@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:56:00 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/12 02:30:03 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/17 11:52:33 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <utility>
 # include <cstdlib>
 
-# define INF "bad_date.csv"
+# define DATA "data.csv"
 
 class	BitcoinExchange
 {
@@ -32,7 +32,7 @@ class	BitcoinExchange
 		BitcoinExchange	&operator=(BitcoinExchange const &inst);
 
 	private:
-		void	_init_database(void);
+		bool	_init_database(void);
 
 		std::map<std::string, float>	_database;
 };

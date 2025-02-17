@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:57:09 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/12 05:29:51 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/17 12:28:10 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 BitcoinExchange::BitcoinExchange(void) : _database()
 {
-	this->_init_database();
+	if (!this->_init_database())
+	{
+		std::cerr << "Error: couldn't init database" << std::endl;
+		this->~BitcoinExchange();
+	}
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &copy) : _database(copy._database)
@@ -96,7 +100,7 @@ static bool	is_date_valid(std::string line)
 	return (1);
 }
 
-static bool	is_value_valid(std::string line)
+static bool	is_value_valid(std::string line, int n)
 {
 	int		i = 0;
 	int		dot = 0;
@@ -124,7 +128,7 @@ static bool	is_value_valid(std::string line)
 		std::cerr << "Error: not a positive number." << std::endl;
 		return (0);
 	}
-	else if (value > 1000)
+	else if (n == 1 && value > 1000)
 	{
 		std::cerr << "Error: number is too big." << std::endl;
 		return (0);
@@ -133,46 +137,100 @@ static bool	is_value_valid(std::string line)
 }
 
 /*Member functions*/
-void	BitcoinExchange::_init_database(void)
+bool	BitcoinExchange::_init_database(void)
 {
-	std::ifstream	infile;
+	std::ifstream	database;
 	std::string		line;
+	std::string		date;
 	unsigned int	i;
+	float			value;
 
-	infile.open(INF);
-	if (!infile.is_open())
+	database.open(DATA);
+	if (!database.is_open())
 	{
 		std::cerr << "Error: could not open database" << std::endl;
-		return;
+		return (0);
 	}
-	std::getline(infile, line);
-	while (std::getline(infile, line))
+	std::getline(database, line);
+	while (std::getline(database, line))
 	{
 		if (!is_date_valid(line))
-			std::cerr << "Error: date isn't valid: " << line << std::endl;
+			return (0);
+		i = 0;
+		while (line[i] && ((line[i] >= '0' && line[i] <= '9') || line[i] == '-'))
+			i++;
+		if (line.find(" | ") != i && line.find_first_of(",") != i)
+			return (0);
+		if (line[i] == ',' && !(line[i + 1] >= '0' && line[i + 1] <= '9'))
+			return (0);
+		else if (line [i] == ' ' && (line[i + 1] != '|' || line[i + 2] != ' ' ||
+		!(line[i + 3] >= '0' && line[i + 3] <= '9')))
+			return (0);
 		else
 		{
-			i = 0;
-			while (line[i] && ((line[i] >= '0' && line[i] <= '9') || line[i] == '-'))
+			while (line[i] && (line[i] == ' ' || line[i] == '|' || line[i] == ','))
 				i++;
-			if (line.find(" | ") != i && line.find_first_of(",") != i)
-				std::cerr << "Error: bad input => " << line << std::endl;
-			else
-			{
-				if (line[i] == ',' && !(line[i + 1] >= '0' && line[i + 1] <= '9'))
-					std::cerr << "Error: bad input => " << line << std::endl;
-				else if (line [i] == ' ' && (line[i + 1] != '|' || line[i + 2] != ' ' ||
-				!(line[i + 3] >= '0' && line[i + 3] <= '9')))
-					std::cerr << "Error: bad input => " << line << std::endl;
-				else
-				{
-					while (line[i] && (line[i] == ' ' || line[i] == '|' || line[i] == ','))
-						i++;
-					if (is_value_valid(&line[i]))
-					{
-					}
-				}
-			}
+			if (!is_value_valid(&line[i], 0))
+				return (0);
+			date = line.substr(0, 10);
+			value = std::atof(&line[i]);
+			//std::cout << "date : " << date << "\t" << "value : " << value << std::endl;
+			this->_database.insert(std::pair<std::string, float>(date, value));
 		}
 	}
+
+	std::map<std::string, float>::iterator	it;
+	for (it = this->_database.begin(); it != this->_database.end(); it++)
+	{
+		std::cout << it->first << " => " << it->second << std::endl;
+	}
+	return (1);
 }
+
+
+
+
+// void	BitcoinExchange::_init_database(void)
+// {
+// 	std::ifstream	database;
+// 	std::string		line;
+// 	unsigned int	i;
+
+// 	database.open(DATA);
+// 	if (!database.is_open())
+// 	{
+// 		std::cerr << "Error: could not open database" << std::endl;
+// 		return;
+// 	}
+// 	std::getline(database, line);
+// 	while (std::getline(database, line))
+// 	{
+// 		if (!is_date_valid(line))
+// 			std::cerr << "Error: date isn't valid: " << line << std::endl;
+// 		else
+// 		{
+// 			i = 0;
+// 			while (line[i] && ((line[i] >= '0' && line[i] <= '9') || line[i] == '-'))
+// 				i++;
+// 			if (line.find(" | ") != i && line.find_first_of(",") != i)
+// 				std::cerr << "Error: bad input => " << line << std::endl;
+// 			else
+// 			{
+// 				if (line[i] == ',' && !(line[i + 1] >= '0' && line[i + 1] <= '9'))
+// 					std::cerr << "Error: bad input => " << line << std::endl;
+// 				else if (line [i] == ' ' && (line[i + 1] != '|' || line[i + 2] != ' ' ||
+// 				!(line[i + 3] >= '0' && line[i + 3] <= '9')))
+// 					std::cerr << "Error: bad input => " << line << std::endl;
+// 				else
+// 				{
+// 					while (line[i] && (line[i] == ' ' || line[i] == '|' || line[i] == ','))
+// 						i++;
+// 					if (is_value_valid(&line[i]))
+// 					{
+
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
