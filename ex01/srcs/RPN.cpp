@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:42:46 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/17 17:07:00 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/19 01:16:56 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	RPN::proceed_calc(std::string input)
 			throw RPN::BadInputException();
 		if (is_num(input[i]))
 		{
-			num = atoi(&input[i]);
+			num = std::atoi(&input[i]);
 			if (num < 0 || num > 9)
 				throw RPN::BadInputException();
 			this->_mystack.push(num);
