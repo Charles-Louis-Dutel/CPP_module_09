@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:08:16 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/19 02:23:07 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/20 11:05:45 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-	PmergeMe	sorting(argv);
-	
+	//PmergeMe	sorting;
+	std::vector<int>	vec;
+	::init_container(vec, argv);
+
 	return (0);
 }
