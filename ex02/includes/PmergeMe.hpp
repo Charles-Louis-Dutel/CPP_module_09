@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/20 11:06:17 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/20 11:18:20 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ class PmergeMe
 
 		PmergeMe	&operator=(PmergeMe const &inst);
 
+		void		merge_sort_vector(std::vector<int> &vec, int pair_lvl);
 
 	private:
 		unsigned int		_start_time;
