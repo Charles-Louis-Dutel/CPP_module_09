@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:08:16 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 16:34:14 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:58:49 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,21 @@ int	main(int argc, char **argv)
 	std::vector<int>	vec;
 	std::vector<int>::iterator	it;
 
-	::init_container(vec, argv);
-	std::cout << "Before trying to swap : " << std::endl;
-	for (it = vec.begin(); it != vec.end(); it++)
+	try
 	{
-		std::cout << *it << "\t";
+		::init_container(vec, argv);
+		std::cout << "Before: ";
+		::display_container(vec);
+		sorting.merge_sort_vector(vec, 1);
+		std::cout << "After: ";
+		::display_container(vec);
+		std::cout << std::endl << std::endl;
+		::is_container_sorted(vec);
 	}
-	std::cout << std::endl << std::endl << std::endl;
-
-	sorting.merge_sort_vector(vec, 1);
-
-	// Vérification finale pour repositionner le dernier élément s'il n'est pas le plus grand
-
-
-	std::cout << std::endl << std::endl << "After last swap : " << std::endl;
-	for (it = vec.begin(); it != vec.end(); it++)
+	catch (PmergeMe::InvalidArgException	&e)
 	{
-		std::cout << *it << "\t";
+		std::cerr << e.what() << std::endl;
 	}
-	std::cout << std::endl << std::endl;
-	::is_container_sorted(vec);
 
 	return (0);
 }

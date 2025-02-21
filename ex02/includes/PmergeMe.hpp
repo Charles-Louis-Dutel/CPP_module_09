@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 16:33:32 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:01:07 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@
 
 # define MAX_SIZE 10000
 
+class PmergeMe
+{
+	public:
+		PmergeMe(void);
+		PmergeMe(PmergeMe const &copy);
+		~PmergeMe(void);
+
+		PmergeMe	&operator=(PmergeMe const &inst);
+
+		void		merge_sort_vector(std::vector<int> &vec, int pair_lvl);
+
+		class InvalidArgException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return "Error: List of arguments is invalid";
+				}
+		};
+
+	private:
+		unsigned int		_start_time;
+};
+
 template<typename T>
 void	init_container(T &cont, char **argv)
 {
@@ -34,20 +58,12 @@ void	init_container(T &cont, char **argv)
 	{
 		temp = argv[i];
 		if (i > MAX_SIZE)
-		{
-			std::cerr << "Error: too much arguments" << std::endl;
-		}
+			throw PmergeMe::InvalidArgException();
 		if (temp.size() > 10 || temp.find_first_not_of("0123456789") != std::string::npos)
-		{
-			std::cerr << "Error: List of arguments is invalid" << std::endl;
-			return;
-		}
+			throw PmergeMe::InvalidArgException();
 		n = std::atol(argv[i]);
 		if (n < 0 || n > std::numeric_limits<int>::max())
-		{
-			std::cerr << "Error: List of arguments is invalid" << std::endl;
-			return;
-		}
+			throw PmergeMe::InvalidArgException();
 		cont.push_back(static_cast<int>(n));
 	}
 }
@@ -66,19 +82,15 @@ void	is_container_sorted(T &cont)
 	std::cout << "Container is successfully sorted !" << std::endl;
 }
 
-class PmergeMe
+template<typename T>
+void	display_container(T &cont)
 {
-	public:
-		PmergeMe(void);
-		PmergeMe(PmergeMe const &copy);
-		~PmergeMe(void);
-
-		PmergeMe	&operator=(PmergeMe const &inst);
-
-		void		merge_sort_vector(std::vector<int> &vec, int pair_lvl);
-
-	private:
-		unsigned int		_start_time;
-};
-
+	for (size_t i = 0; i < cont.size(); i++)
+	{
+		std::cout << cont[i];
+		if (i + 1 != cont.size())
+			std::cout << "  ";
+	}
+	std::cout << std::endl;
+}
 #endif
