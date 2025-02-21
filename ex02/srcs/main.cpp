@@ -6,13 +6,14 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:08:16 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 15:19:37 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:34:14 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PmergeMe.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <algorithm>
 
 int	main(int argc, char **argv)
 {
@@ -44,7 +45,8 @@ int	main(int argc, char **argv)
 	{
 		std::cout << *it << "\t";
 	}
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
+	::is_container_sorted(vec);
 
 	return (0);
 }

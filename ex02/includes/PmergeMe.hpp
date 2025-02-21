@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 15:20:23 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:33:32 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ void	init_container(T &cont, char **argv)
 		}
 		cont.push_back(static_cast<int>(n));
 	}
+}
+
+template<typename T>
+void	is_container_sorted(T &cont)
+{
+	for (size_t i = 1; i < cont.size(); i++)
+	{
+		if (cont[i] < cont[i - 1])
+		{
+			std::cout << "NOT SORTED" << std::endl;
+			return;
+		}
+	}
+	std::cout << "Container is successfully sorted !" << std::endl;
 }
 
 class PmergeMe
