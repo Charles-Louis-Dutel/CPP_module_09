@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 17:01:07 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:30:07 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class PmergeMe
 		PmergeMe	&operator=(PmergeMe const &inst);
 
 		void		merge_sort_vector(std::vector<int> &vec, int pair_lvl);
+		void		merge_sort_deque(std::deque<int> &deq, int pair_lvl);
 
 		class InvalidArgException : public std::exception
 		{
