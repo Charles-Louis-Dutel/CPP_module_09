@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 12:06:48 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:20:23 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdexcept>
 # include <limits>
 # include <cstdlib>
+# include <algorithm>
 
 # define MAX_SIZE 10000
 

@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:08:16 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/20 14:39:20 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:19:37 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	main(int argc, char **argv)
 	std::cout << std::endl << std::endl << std::endl;
 
 	sorting.merge_sort_vector(vec, 1);
+
+	// Vérification finale pour repositionner le dernier élément s'il n'est pas le plus grand
+
 
 	std::cout << std::endl << std::endl << "After last swap : " << std::endl;
 	for (it = vec.begin(); it != vec.end(); it++)

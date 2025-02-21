@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:12:23 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 14:48:44 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:52:11 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	PmergeMe::merge_sort_vector(std::vector<int> &vec, int pair_lvl)
 
 
 	/*Inserting part*/
-	if (pair_lvl == max)
-		return;
+	// if (pair_lvl == max)
+	// 	return;
 	std::cout << "\033[31m*******************************************************************************************************\033[0m" << std::endl;
 	std::cout << "\033[34mPAIR_LVL: " << pair_lvl << "\033[0m" << std::endl;
 	std::cout << "necessary: " << necessary << std::endl;
@@ -242,7 +242,7 @@ void	PmergeMe::merge_sort_vector(std::vector<int> &vec, int pair_lvl)
 			}
 			if (main_start + pair_lvl == main_end)
 			{
-				main.insert(main_start, odds.begin(), odds.begin() + pair_lvl);
+				main.insert(main.end(), odds.begin(), odds.begin() + pair_lvl);
 				odds.erase(odds.begin(), odds.begin() + pair_lvl);
 				break;
 			}
