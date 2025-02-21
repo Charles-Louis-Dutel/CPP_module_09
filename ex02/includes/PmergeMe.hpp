@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:09:10 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/20 11:18:20 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/02/21 12:06:48 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <limits>
 # include <cstdlib>
 
+# define MAX_SIZE 10000
+
 template<typename T>
 void	init_container(T &cont, char **argv)
 {
@@ -30,15 +32,19 @@ void	init_container(T &cont, char **argv)
 	for (int i = 1; argv[i]; i++)
 	{
 		temp = argv[i];
+		if (i > MAX_SIZE)
+		{
+			std::cerr << "Error: too much arguments" << std::endl;
+		}
 		if (temp.size() > 10 || temp.find_first_not_of("0123456789") != std::string::npos)
 		{
-			std::cerr << "List of arguments is invalid" << std::endl;
+			std::cerr << "Error: List of arguments is invalid" << std::endl;
 			return;
 		}
 		n = std::atol(argv[i]);
 		if (n < 0 || n > std::numeric_limits<int>::max())
 		{
-			std::cerr << "List of arguments is invalid" << std::endl;
+			std::cerr << "Error: List of arguments is invalid" << std::endl;
 			return;
 		}
 		cont.push_back(static_cast<int>(n));
