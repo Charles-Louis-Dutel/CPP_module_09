@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:40:53 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/17 16:28:15 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:02 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ class	RPN
 				virtual const char *what() const throw()
 				{
 					return "Error: bad input";
+				}
+		};
+
+		class DivideByZeroException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return "Error: dividing by zero is impossible";
 				}
 		};
 

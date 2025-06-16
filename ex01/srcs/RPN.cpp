@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:42:46 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/19 01:16:56 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:10 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	calc(int n1, int n2, char c)
 			res = n2 * n1;
 			break;
 		case '/':
+			if (n2 == 0)
+				throw RPN::DivideByZeroException();
 			res = n2 / n1;
 			break;
 		default:
@@ -104,8 +106,7 @@ void	RPN::proceed_calc(std::string input)
 			this->_mystack.pop();
 
 			if (this->_mystack.empty())
-				{std::cout << "4" << std::endl;
-				throw RPN::BadInputException();}
+				throw RPN::BadInputException();
 			num2 = this->_mystack.top();
 			this->_mystack.pop();
 

@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:37:54 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/17 16:48:06 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:58 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	main(int argc, char **argv)
 		calculator.proceed_calc(arg);
 	}
 	catch(RPN::BadInputException &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	catch(RPN::DivideByZeroException &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
