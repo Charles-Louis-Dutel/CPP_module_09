@@ -6,7 +6,7 @@
 /*   By: cdutel <cdutel@42student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 17:08:16 by cdutel            #+#    #+#             */
-/*   Updated: 2025/02/21 17:41:16 by cdutel           ###   ########.fr       */
+/*   Updated: 2025/06/16 18:39:31 by cdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 		std::cout << computing_time << "us" << std::endl;
 
 
-		std::cout << std::endl << std::endl << std::endl;
+		//std::cout << std::endl << std::endl << std::endl;
 
 
 		std::deque<int>	deq;
@@ -61,15 +61,15 @@ int	main(int argc, char **argv)
 
 		start_time = std::clock();
 		::init_container(deq, argv);
-		std::cout << "Before: ";
-		::display_container(deq);
+		//std::cout << "Before: ";
+		//::display_container(deq);
 
 		sorting.merge_sort_deque(deq, 1);
 		end_time = std::clock();
 
-		std::cout << "After: ";
-		::display_container(deq);
-		::is_container_sorted(deq);
+		//std::cout << "After: ";
+		//::display_container(deq);
+		//::is_container_sorted(deq);
 
 		computing_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000000;
 		std::cout << "Time to process a range of " << deq.size();
